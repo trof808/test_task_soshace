@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var db = require('./db/db');
 var PORT = process.env.PORT || 3001;
 var IP = process.env.IP || 'localhost';
 
@@ -14,11 +15,15 @@ if (app.get('env') === 'development') {
     }));
 }
 
-app.get('/', function(req, res) {
-    res.send('hi');
+app.use('/', require('./routes/index'));
+
+app.use((err, req ,res, next) => {
+    // res.status(err.status);
+    res.send({error: err.message});
+    console.log(err.message);
 });
 
-app.listen(PORT, 'localhost', function(err) {
+app.listen(PORT, IP, function(err) {
     if (err) {
         console.log(err);
         return;
