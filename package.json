@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run dev\" \"npm run api\"",
+    "serve": "nodemon server/server.js",
+    "dev": "webpack-dev-server --hot --inline",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
