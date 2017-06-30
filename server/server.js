@@ -28,6 +28,6 @@ app.listen(PORT, IP, function(err) {
         console.log(err);
         return;
     } else {
-        console.log('server is running');
+        console.log('сервер запущен в среде ' + app.get('env'));
     }
 });
