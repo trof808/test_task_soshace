@@ -2,7 +2,7 @@
   "name": "test_teask_soshace",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "concurrently \"npm run dev\" \"npm run serve\"",
     "serve": "nodemon server/server.js",
@@ -27,7 +27,9 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "bootswatch": "^3.3.7",
+    "fetch-jsonp": "^1.1.1",
     "immutable": "^3.8.1",
+    "jquery": "^3.2.1",
     "react": "^15.2.0",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.2.0",
