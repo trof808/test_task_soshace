@@ -15,10 +15,39 @@ class ModalWindow extends Component {
     }
 
     componentDidMount() {
-        getCategories().then(res => console.log(res)).catch(error => console.log(error))
+        fetch('http://localhost:3001/api/category')
+            .then(res => res.json())
+            .then(data => this.setState({ categories: data }))
+            .catch(error => console.log(error))
     }
 
     addItem() {
+        if(this.props.target == 'category') {
+            fetch('http://localhost:3001/api/add/category', 
+            { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: this.inputCat.value
+                })
+            })
+        } else {
+            fetch('http://localhost:3001/api/add/item', 
+            { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: this.itemName.value,
+                    purchase_pice: this.itemPurchase.value,
+                    category: this.itemCat.value,
+                    selling_price: this.itemSelling.value
+                })
+            })
+        }
         this.props.close();
     }
 
@@ -29,9 +58,9 @@ class ModalWindow extends Component {
                 <div>
                     <FormGroup>
                         <ControlLabel>Категория</ControlLabel>
-                        <FormControl componentClass="select" placeholder="select">
+                        <FormControl inputRef={ref => { this.itemCat = ref; }} componentClass="select" placeholder="select">
                             {this.state.categories.map((category) => (
-                                <option value={category._id}>{category.title}</option>
+                                <option key={category._id} value={category.title}>{category.title}</option>
                             ))}
                             
                         </FormControl>
@@ -39,6 +68,7 @@ class ModalWindow extends Component {
                     <FormGroup>
                         <ControlLabel>Название товара</ControlLabel>
                         <FormControl
+                            inputRef={ref => { this.itemName = ref; }}
                             id="inputName"
                             type="text"
                             placeholder="Название товара"
@@ -47,6 +77,7 @@ class ModalWindow extends Component {
                     <FormGroup>
                         <ControlLabel>Закупочная стоимость</ControlLabel>
                         <FormControl
+                            inputRef={ref => { this.itemPurchase = ref; }}
                             id="inputPurchase"
                             type="text"
                             placeholder="Закупочная стоимость"
@@ -55,6 +86,7 @@ class ModalWindow extends Component {
                     <FormGroup>
                         <ControlLabel>Розничная цена</ControlLabel>
                         <FormControl
+                            inputRef={ref => { this.itemSelling = ref; }}
                             id="inputSelling"
                             type="text"
                             placeholder="Розничная цена"
@@ -71,6 +103,7 @@ class ModalWindow extends Component {
                     <FormGroup>
                         <ControlLabel>Название категории</ControlLabel>
                         <FormControl
+                            inputRef={ref => { this.inputCat = ref; }}
                             id="categoryName"
                             type="text"
                             placeholder="Название категории"
