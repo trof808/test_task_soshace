@@ -11,19 +11,19 @@ class Header extends Component {
             target: ''
         }
 
-        this.addItem = this.addItem.bind(this);
-        this.addCategory = this.addCategory.bind(this);
+        this.addItemModal = this.addItemModal.bind(this);
+        this.addCategoryModal = this.addCategoryModal.bind(this);
         this.close = this.close.bind(this);
     }
 
-    addItem() {
+    addItemModal() {
         this.setState({ 
             show: true,
             target: 'item' 
         })
     }
 
-    addCategory() {
+    addCategoryModal() {
         this.setState({ 
             show: true,
             target: 'category' 
@@ -45,8 +45,8 @@ class Header extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <ButtonToolbar>
-                        <Button style={styles.buttons} bsStyle="primary" onClick={this.addItem}>Добавить товар</Button>
-                        <Button style={styles.buttons} bsStyle="primary" onClick={this.addCategory}>Добавить категорию</Button>
+                        <Button style={styles.buttons} bsStyle="primary" onClick={this.addItemModal}>Добавить товар</Button>
+                        <Button style={styles.buttons} bsStyle="primary" onClick={this.addCategoryModal}>Добавить категорию</Button>
                     </ButtonToolbar>
                 </Navbar.Collapse>
                 <ModalWindow show={this.state.show} close={this.close} target={this.state.target}/>
